@@ -2,7 +2,7 @@ import historicalEventsRepository from '../repository/historicalEventsRepository
 
 exports.getHistoricalEventsByOcurrence = (ctx) => {
     const ocurrence = ctx.params.ocurrence
-    if (!(containsNumber(ocurrence))){
+    if ((containsNumber(ocurrence))){
         ctx.status = 400;
         ctx.message = "El input debe ser ac o dc";
     }
