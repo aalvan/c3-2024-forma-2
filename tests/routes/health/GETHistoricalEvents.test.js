@@ -24,6 +24,23 @@ describe('GET /api/users/:ocurrence', ()=>{
         expect(response.status).toBe(200)
         expect(response.body).toEqual(getMockDcData())
     });
+    test('if ocurrence equal to an alphanumeric characters or a number, return 400 error', async ()=>{
+        const ocurrence = 'd1'
+        sinon.stub(historicalEventsRepository, 'getHistoricalEvents').returns()
+        const response = await request(app.callback()).get(`/api/history/${ocurrence}`);
+        const message = "Solo se aceptan caracteres no numéricos"
+        expect(response.status).toBe(400)
+        expect(response.body.message).toBe(message)
+    });
+
+    test('if lenth of ocurrence != 2, return 400 error', async ()=>{
+        const ocurrence = '111'
+        sinon.stub(historicalEventsRepository, 'getHistoricalEvents').returns()
+        const response = await request(app.callback()).get(`/api/history/${ocurrence}`);
+        const message = "El input debe ser ac o dc"
+        expect(response.status).toBe(400)
+        expect(response.body.message).toBe(message)
+    });
 });
 
 function getMockAcData(){

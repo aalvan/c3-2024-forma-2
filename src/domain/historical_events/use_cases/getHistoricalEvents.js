@@ -6,11 +6,11 @@ exports.getHistoricalEventsByOcurrence = (ctx) => {
 
     if(ocurrence.length !== 2){
         ctx.status = 400;
-        ctx.message = "El input debe ser ac o dc";
+        ctx.body = {message: "El input debe ser ac o dc"}
     }
     else if ((containsNumber(ocurrence) || !(regex.test(ocurrence)))){
         ctx.status = 400;
-        ctx.message = "Solo se aceptan caracteres no numéricos";
+        ctx.body = {message: "Solo se aceptan caracteres no numéricos"}
     }
     else{
         ctx.body = historicalEventsRepository.getHistoricalEvents(ctx.params.ocurrence)
